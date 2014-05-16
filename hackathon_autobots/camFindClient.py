@@ -24,7 +24,7 @@ response = unirest.post("https://camfind.p.mashape.com/image_requests",
 print(response.raw_body)
 key = response.raw_body[10:-2]
 
-succeeded = Falsex
+succeeded = False
 responseBody = ''
 while not succeeded:
 	time.sleep(1)
