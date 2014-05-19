@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/javax.json-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/javax.json-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/httpmime-4.3.3.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/commons-collections4-4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/httpclient-4.3.3.jar"/>
+	<classpathentry kind="lib" path="/Users/rswanson/Documents/repos/github/pdf-web-api-clients/java/PDFWebAPIClients/lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
