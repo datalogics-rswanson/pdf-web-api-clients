@@ -237,7 +237,7 @@ namespace Datalogics.PDFWebAPI
         /** Sets the resolution of the image in dpi.
 	    * @param resolution - The resolution of the image in dpi.
 	    */
-        public void setResolution(int resolution)
+        public void SetResolution(int resolution)
         {
             options.Resolution = resolution;
         }
@@ -245,7 +245,7 @@ namespace Datalogics.PDFWebAPI
         /** Sets the smoothing if any to be applied to the output image.
 	    * @param smoothing - An smoothing option of the type Smoothing.
 	    */
-        public void setSmoothing(Smoothing smoothing)
+        public void SetSmoothing(Smoothing smoothing)
         {
             string[] smoothingOptions = { "all", "none", "text", "line", "image" };
             options.Smoothing = smoothingOptions[(int)smoothing];

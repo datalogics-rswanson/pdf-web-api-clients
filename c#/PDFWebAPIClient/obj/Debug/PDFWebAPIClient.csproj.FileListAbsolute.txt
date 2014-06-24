@@ -4,3 +4,9 @@
 \\vmware-host\shared folders\documents\visual studio 2013\Projects\PDFWebAPIClient\PDFWebAPIClient\bin\Debug\PDFWebAPIClient.pdb
 \\vmware-host\shared folders\documents\visual studio 2013\Projects\PDFWebAPIClient\PDFWebAPIClient\obj\Debug\PDFWebAPIClient.exe
 \\vmware-host\shared folders\documents\visual studio 2013\Projects\PDFWebAPIClient\PDFWebAPIClient\obj\Debug\PDFWebAPIClient.pdb
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\bin\Debug\PDFWebAPIClient.exe.config
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\obj\Debug\PDFWebAPIClient.exe
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\obj\Debug\PDFWebAPIClient.pdb
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\bin\Debug\PDFWebAPIClient.exe
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\bin\Debug\PDFWebAPIClient.pdb
+Z:\pdf-web-api-clients\c#\PDFWebAPIClient\obj\Debug\PDFWebAPIClient.csprojResolveAssemblyReference.cache

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FillFormRequest.cs" />
     <Compile Include="RenderPagesRequest.cs" />
     <Compile Include="PDFWebAPIResponse.cs" />
     <Compile Include="PDFWebAPIClient.cs" />

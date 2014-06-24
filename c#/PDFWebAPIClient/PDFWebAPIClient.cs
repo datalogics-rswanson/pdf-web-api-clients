@@ -90,6 +90,17 @@ namespace Datalogics.PDFWebAPI
         }
 
         /**
+	     * This method creates a FillFormRequest object that is to be used to
+	     * request filling of the forms within a pdf using a form data file.
+	     * 
+	     * @return A FillFormRequest object.
+	     */
+        public FillFormRequest CreateFillFormRequest()
+        {
+            return new FillFormRequest(id, key, GetRequestURL(RequestType.FillForm));
+        }
+
+        /**
 	     * Gets the URL of the requested service on the PDF WebAPI server. Each
 	     * request type must be submitted to its own unique URL for processing.
 	     * 
