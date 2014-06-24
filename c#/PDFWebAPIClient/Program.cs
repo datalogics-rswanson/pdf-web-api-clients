@@ -93,6 +93,29 @@ namespace Datalogics.PDFWebAPI
                 Console.WriteLine("ErrorMessage: " + response.GetErrorMessage());
             }
 
+            FillFormRequest fillFormRequest = client.CreateFillFormRequest();
+
+            // Setup the FillForm Request
+            fillFormRequest.SetInputFile("..\\..\\input\\FruitForm_1_AcroForm.pdf");
+            fillFormRequest.SetFormData("..\\..\\input\\FruitForm_1_AcroForm_data.xfdf");
+            fillFormRequest.SetFlattening(true);          
+
+            // Get the response
+            PDFWebAPIResponse fillFormResponse = fillFormRequest.GetResponse();
+
+            // Celebrate or Cry
+            if (fillFormResponse.Succeeded)
+            {
+                Console.WriteLine("Success - writing output file \"output\\FruitForm_1_AcroForm.pdf\"");
+                bool pdfWritten = fillFormResponse.SaveProcFile("..\\..\\output\\FruitForm_1_AcroForm.pdf").Result;
+            }
+            else
+            {
+                Console.WriteLine("Failure");
+                Console.WriteLine("ErrorCode: " + fillFormResponse.GetErrorCode());
+                Console.WriteLine("ErrorMessage: " + fillFormResponse.GetErrorMessage());
+            }
+
             // Keep console open
             Console.WriteLine("\nHit any key to exit");
             Console.ReadKey();

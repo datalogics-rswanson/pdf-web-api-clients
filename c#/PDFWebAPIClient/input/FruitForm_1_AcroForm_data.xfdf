@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve"
+><f href="../Dropbox/PracticalPDF/Desktop Groups/Projects/Datalogics/FruitForm/FruitForm_1_AcroForm.pdf"
+/><fields
+><field name="accountNumber"
+><value
+>123456</value
+></field
+><field name="address"
+><value
+>101 N. Wacker Dr, Suite 1800</value
+></field
+><field name="apples"
+><value
+>Yes</value
+></field
+><field name="bananas"
+><value
+>Yes</value
+></field
+><field name="city"
+><value
+>Chicago</value
+></field
+><field name="cost"
+><value
+>20</value
+></field
+><field name="deliveryCharge"
+><value
+>15.75</value
+></field
+><field name="durian"
+><value
+>Yes</value
+></field
+><field name="email"
+><value
+>joel@datalogics.com</value
+></field
+><field name="name"
+><value
+>Joel Geraci</value
+></field
+><field name="oranges"
+><value
+>Off</value
+></field
+><field name="pears"
+><value
+>Off</value
+></field
+><field name="phone"
+><value
+>1-312-853-8200</value
+></field
+><field name="quantity"
+><value
+>2</value
+></field
+><field name="state"
+><value
+>IL</value
+></field
+><field name="total"
+><value
+>55.75</value
+></field
+><field name="zip"
+><value
+>60606</value
+></field
+></fields
+><ids original="27192C02C69C42FDA8019DA695B8AB87" modified="A2BD9D75A1469249830C417FF033296C"
+/></xfdf
+>

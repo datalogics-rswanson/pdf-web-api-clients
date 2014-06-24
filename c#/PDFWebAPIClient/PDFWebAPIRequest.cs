@@ -154,6 +154,25 @@ namespace Datalogics.PDFWebAPI
             }
         }
 
+        public void SetFormData(string formDataFile, string formDataName = null)
+        {
+            // Associate the pdfFile with the "input" part
+            AddFilePart(formDataFile, "formsData");
+
+            /* If the name parameter is not null or empty store the "formDataName"
+             * part and text body
+             */
+            if (!String.IsNullOrEmpty(formDataName))
+            {
+                SetUniquePart(new StringContent(formDataName), "formDataName");
+            }
+            // This may be a subsequent call so remove the "formDataName" part if found
+            else
+            {
+                partLists.Remove("formDataName");
+            }
+        }
+
         /// <summary>
         /// Blocking method
         /// </summary>
