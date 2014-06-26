@@ -47,7 +47,6 @@
 
 namespace Datalogics.PdfWebApi.RenderPagesOptions
 {
-    /** compression enumerations */
     public enum CompressionType 
     { 
         LZW, 

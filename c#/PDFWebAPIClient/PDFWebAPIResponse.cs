@@ -82,41 +82,41 @@ namespace Datalogics.PdfWebApi
 
         private readonly HttpResponseMessage httpResponseMessage;
         private readonly ErrorInfo errorInfo = new ErrorInfo();
-	    public bool Succeeded { get; private set; }
+        public bool Succeeded { get; private set; }
         public bool Failed { get{ return !Succeeded; } }
         public int ErrorCode { get { return errorInfo.ErrorCode; } }
         public string ErrorMessage { get { return errorInfo.ErrorMessage; } }
 
-	    /// <summary>
+        /// <summary>
         /// This constructor takes an HttpResponse from the PDF WebAPI server and
-	    /// attempts to convert the return content body into a possible JSON error
-	    /// message if the response code is not OK (200).
+        /// attempts to convert the return content body into a possible JSON error
+        /// message if the response code is not OK (200).
         /// </summary>
-	    /// <param name="httpResponseMessage">An HttpResponseMessage from the PDF WebAPI server</param>
-	    public PdfWebApiResponse(HttpResponseMessage httpResponseMessage)
+        /// <param name="httpResponseMessage">An HttpResponseMessage from the PDF WebAPI server</param>
+        public PdfWebApiResponse(HttpResponseMessage httpResponseMessage)
         {
-		    this.httpResponseMessage = httpResponseMessage;
-		    // Check if the request was not successful
-		    if (httpResponseMessage.StatusCode != System.Net.HttpStatusCode.OK){
-			    // Attempt to read a JSON object error message
-			    DataContractJsonSerializer dataContractJsonSerializer = 
+            this.httpResponseMessage = httpResponseMessage;
+            // Check if the request was not successful
+            if (httpResponseMessage.StatusCode != System.Net.HttpStatusCode.OK){
+                // Attempt to read a JSON object error message
+                DataContractJsonSerializer dataContractJsonSerializer = 
                     new DataContractJsonSerializer(typeof(ErrorInfo));
                 errorInfo = (ErrorInfo)dataContractJsonSerializer.ReadObject(httpResponseMessage.Content.ReadAsStreamAsync().Result);
-		    }
+            }
             else 
             { 
                 errorInfo.ErrorCode = 0;
                 errorInfo.ErrorMessage = "";
                 Succeeded = true; 
             }
-	    }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// If the request succeeds, this method saves the processed output file to
-	    /// the requested file path.
+        /// the requested file path.
         /// </summary>
         /// <param name="fileName">The file path to save the processed return file to</param>
-	    /// <returns>A boolean indicating successful saving of the file</returns>
+        /// <returns>A boolean indicating successful saving of the file</returns>
         public async Task<bool> SaveProcFile(string fileName)
         {
             if (Failed)

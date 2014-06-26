@@ -47,7 +47,6 @@
 
 namespace Datalogics.PdfWebApi.RenderPagesOptions
 {
-    /** outputFormat enumerations */
     public enum OutputFormat
     { 
         PNG,

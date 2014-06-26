@@ -176,7 +176,7 @@ namespace Datalogics.PdfWebApi.Client
         /// Sets if the overprinting preview simulation should be used.
         /// </summary>
         /// <param name="overprintingPreview">A boolean indicating if overprinting preview
-	    /// simulation should be used.</param>
+        /// simulation should be used.</param>
         public void SetOverprintingPreview(bool overprintingPreview)
         {
             options.OverPrintingPreview = overprintingPreview;
@@ -245,7 +245,7 @@ namespace Datalogics.PdfWebApi.Client
         /// <param name="resampler">An enumeration of the Resample type</param>
         public void SetResampler(Resampler resampler)
         {
-	        options.Resampler = resampler.ToString();
+            options.Resampler = resampler.ToString();
         }
 
         /// <summary>

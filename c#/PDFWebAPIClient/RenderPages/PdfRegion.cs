@@ -47,7 +47,6 @@
 
 namespace Datalogics.PdfWebApi.RenderPagesOptions
 {
-    /** pdfRegion enumerations */
     public enum PdfRegion 
     { 
         Crop,

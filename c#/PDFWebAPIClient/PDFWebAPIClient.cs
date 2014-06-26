@@ -72,8 +72,8 @@ namespace Datalogics.PdfWebApi.Client
 
         ///<summary>
         ///This constructor is used to instantiate a PdfWebApiClient with the given
-	    ///application id and key to be used for authentication of the client with
-	    ///PDF Web API server.
+        ///application id and key to be used for authentication of the client with
+        ///PDF Web API server.
         ///</summary>
         ///<param name="id">The application id registered with PdfWebApi</param>
         ///<param name="key">The application key registered with PdfWebApi</param>
@@ -88,18 +88,18 @@ namespace Datalogics.PdfWebApi.Client
         }
 
         ///<summary>
-	    /// This method creates a RenderPagesRequest object that is to be used to
-	    /// request rendering of an image from a pdf.
-	    /// </summary>
+        /// This method creates a RenderPagesRequest object that is to be used to
+        /// request rendering of an image from a pdf.
+        /// </summary>
         /// <returns>A RenderPagesRequest object</returns>
-	    public RenderPagesRequest CreateRenderPagesRequest()
+        public RenderPagesRequest CreateRenderPagesRequest()
         {
             return new RenderPagesRequest(id, key,GetRequestURL(RequestType.RenderPages));
         }
 
         /// <summary>
         /// This method creates a FillFormRequest object that is to be used to
-	    /// request filling of the forms within a pdf using a form data file.
+        /// request filling of the forms within a pdf using a form data file.
         /// </summary>
         /// <returns>A FillFormRequest object</returns>
         public FillFormRequest CreateFillFormRequest()
@@ -108,35 +108,35 @@ namespace Datalogics.PdfWebApi.Client
         }
 
         /// <summary>
-	    /// Gets the URL of the requested service on the PDF WebAPI server. Each
-	    /// request type must be submitted to its own unique URL for processing.
-	    /// </summary>
+        /// Gets the URL of the requested service on the PDF WebAPI server. Each
+        /// request type must be submitted to its own unique URL for processing.
+        /// </summary>
         /// <param name="requestType">The RequestType to retrieve the Url for</param>
         /// <returns>A Url for the specified RequestType as a Uri</returns>
         private static Uri GetRequestURL(RequestType requestType) {
-		    // The PDF Web API server base Url
-		    const string BASE_URL = "https://pdfprocess.datalogics-cloud.com/api/actions/";
-		    // Request Url to return
-		    string url = null;
-		    // Get request specific Url
-		    switch (requestType) {
-		        case RequestType.ExportFormData:
-			        url = BASE_URL + "export/form-data";
-			        break;
-                case RequestType.FillForm:
-			        url = BASE_URL + "fill/form";
-			        break;
-                case RequestType.FlattenForm:
-			        url = BASE_URL + "flatten/form";
-			        break;
-                case RequestType.RenderPages:
-			        url = BASE_URL + "render/pages";
-			        break;
-                case RequestType.DecorateDocument:
-			        url = BASE_URL + "decorate/document";
+            // The PDF Web API server base Url
+            const string BASE_URL = "https://pdfprocess.datalogics-cloud.com/api/actions/";
+            // Request Url to return
+            string url = null;
+            // Get request specific Url
+            switch (requestType) {
+                case RequestType.ExportFormData:
+                    url = BASE_URL + "export/form-data";
                     break;
-		    }
-		    return new Uri(url);
-	    }
+                case RequestType.FillForm:
+                    url = BASE_URL + "fill/form";
+                    break;
+                case RequestType.FlattenForm:
+                    url = BASE_URL + "flatten/form";
+                    break;
+                case RequestType.RenderPages:
+                    url = BASE_URL + "render/pages";
+                    break;
+                case RequestType.DecorateDocument:
+                    url = BASE_URL + "decorate/document";
+                    break;
+            }
+            return new Uri(url);
+        }
     }
 }
