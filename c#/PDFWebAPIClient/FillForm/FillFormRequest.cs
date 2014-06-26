@@ -50,17 +50,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Net.Http;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.IO;
 
-namespace Datalogics.PDFWebAPI
+namespace Datalogics.PdfWebApi.Client
 {
-    public sealed class FillFormRequest : PDFWebAPIRequest
+    /// <summary>
+    /// This class is derived from the PdfWebApiRequest base class and is responsible for
+    /// sending FillForm requests to the PDF WebAPI server.
+    /// </summary>
+    public sealed class FillFormRequest : PdfWebApiRequest
     {
-
+        /// <summary>
+        /// This class specifies the data contract required to serialize the FillForm
+        /// options to and from a JSON string.
+        /// </summary>
         [DataContract]
         private class Options
         {
@@ -74,59 +79,69 @@ namespace Datalogics.PDFWebAPI
 
         private Options options = new Options();
 
-        public FillFormRequest(string id, string key, string url) : base(id, key, url)
+        /// <summary>
+        /// Sets the reqiured authorization values and the Url that the request needs.
+        /// </summary>
+        /// <param name="id">The application id</param>
+        /// <param name="key">The application key</param>
+        /// <param name="url">The Url for the request</param>
+        public FillFormRequest(string id, string key, Uri url) : base(id, key, url) { }
+
+        /// <summary>
+        /// This utility method sets the input form-data file for the request.
+        /// Derived classes should only use this method if their request requires an input form-data file. 
+        /// </summary>
+        /// <param name="formDataFile">The form-data file</param>
+        public void SetFormData(string formDataFile)
         {
+            AddFilePart(formDataFile, "formsData");
         }
 
-        /**
-        * Enables or disables the running of calcuations on numeric form fields.
-        * @param disable_calculations - A boolean enabling or disabling the 
-        * running of calculations.
-        */
-        public void SetRunCalculations(bool disableCalculations)
+        /// <summary>
+        /// Enables or disables the running of calculations on numeric form fields
+        /// </summary>
+        /// <param name="disableCalculations">A boolean specifying if numeric form
+        /// fields should have calculations run on them</param>
+        public void SetEnableRunCalculations(bool enableCalculations)
         {
-            options.DisableCalculations = disableCalculations;
+            // Method name should imply enabling to conform to best practices so complement option
+            options.DisableCalculations = !enableCalculations;
         }
 
-        /**
-        * Enables or disables the generation of appearances on form fields.
-        * @param disable_generation - A boolean enabling or disabling the 
-        * generation of appearances.
-        * 
-        * Example: A currency form field would auto-generate a dollar sign
-        * before the value of currency (ie: 6.78 -> $6.78)
-        */
-        public void SetGenerateAppearances(bool disableGeneration)
+        /// <summary>
+        /// Enables or disables the generation of appearances on form fields.
+        /// </summary>
+        /// <param name="enableGeneration">A boolean specifying if appearances
+        /// should be enabled or disabled on form fields</param>
+        /// <example>A currency form field would auto-generate a dollar sign
+        /// before the value of currency (eg. 6.78 -> $6.78)</example>
+        public void SetEnableGenerateAppearances(bool enableGeneration)
         {
-            options.DisableGeneration = disableGeneration;
+            options.DisableGeneration = !enableGeneration;
         }
 
-        /**
-        * Enables or disables the flattening of a pdf's page content.
-        * If flattening is turned on, a page's interactivity is
-        * removed. That is, fields can no longer be edited. 
-        * 
-        * @param flatten - A boolean enabling or disabling the 
-        * flattening of a PDF.
-        */
+        /// <summary>
+        /// Enables or disables the flattening of a pdf's page content.
+        /// If flattening is turned on, a page's interactivity is
+        /// removed. That is, fields can no longer be edited.
+        /// </summary>
+        /// <param name="flatten">A boolean flag indicating if the form
+        /// field should be flattened or not</param>
         public void SetFlattening(bool flatten)
         {
             options.Flatten = flatten;
         }
 
+        /// <summary>
+        /// This method builds the multiform content for the FillFormRequest
+        /// </summary>
         protected override HttpContent BuildRequestContent()
         {
             MultipartFormDataContent content = (MultipartFormDataContent)base.BuildRequestContent();
-            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Options));
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                jsonSerializer.WriteObject(memoryStream, options);
-                content.Add(new StringContent(Encoding.Default.GetString(memoryStream.ToArray())), "options");
-            }
+            content.Add(new StringContent(WriteJsonToString(options), Encoding.UTF8, "application/json"), "options");
 
             return content;
-        }        
+        }
     }
 }
 

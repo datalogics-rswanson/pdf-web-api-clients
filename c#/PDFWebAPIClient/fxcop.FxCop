@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="10.0" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded, Good, Noise" NewOnly="False" />
+   <Report Status="Active, Good, Noise" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="\\vmware-host\Shared Folders\Documents\repos\github\pdf-web-api-clients\c#\PdfWebApiClient\bin\Debug\PdfWebApiClient.dll" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityTransparencyRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="10.0">
+  <Namespaces>
+   <Namespace Name="Datalogics.PdfWebApi">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2014-06-25 01:45:35Z">
+      <Issue>
+       <Item>Datalogics.PdfWebApi</Item>
+      </Issue>
+      <Notes>
+       <User Name="rswanson">
+        <Note Id="3" />
+       </User>
+      </Notes>
+     </Message>
+     <Message Id="Datalogics" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 00:46:18Z">
+      <Issue Name="Namespace">
+       <Item>Datalogics</Item>
+       <Item>Datalogics.PdfWebApi</Item>
+      </Issue>
+      <Notes>
+       <User Name="rswanson">
+        <Note Id="2" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="Datalogics.PdfWebApi.Client">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2014-06-25 01:45:35Z">
+      <Issue>
+       <Item>Datalogics.PdfWebApi.Client</Item>
+      </Issue>
+     </Message>
+     <Message Id="Datalogics" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+      <Issue Name="Namespace">
+       <Item>Datalogics</Item>
+       <Item>Datalogics.PdfWebApi.Client</Item>
+      </Issue>
+      <Notes>
+       <User Name="rswanson">
+        <Note Id="16" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="Datalogics.PdfWebApi.RenderPagesOptions">
+    <Messages>
+     <Message Id="Datalogics" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+      <Issue Name="Namespace">
+       <Item>Datalogics</Item>
+       <Item>Datalogics.PdfWebApi.RenderPagesOptions</Item>
+      </Issue>
+      <Notes>
+       <User Name="rswanson">
+        <Note Id="13" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="\\vmware-host\Shared Folders\Documents\repos\github\pdf-web-api-clients\c#\PdfWebApiClient\bin\Debug\PdfWebApiClient.dll">
+    <Modules>
+     <Module Name="pdfwebapiclient.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2014-06-25 00:46:18Z">
+        <Issue Name="NoStrongName">
+         <Item>'PdfWebApiClient.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="Datalogics.PdfWebApi">
+        <Types>
+         <Type Name="PdfWebApiRequest">
+          <Members>
+           <Member Name="#GetResponse()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Excluded" Created="2014-06-25 01:02:05Z">
+              <Issue Certainty="50">
+               <Item>'PdfWebApiRequest.GetResponse()'</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="0" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetResponseAsync()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Excluded" Created="2014-06-25 01:02:05Z">
+              <Issue Certainty="50">
+               <Item>'PdfWebApiRequest.GetResponseAsync()'</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="1" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PdfWebApiRequest+Application">
+          <Members>
+           <Member Name="#Id">
+            <Accessors>
+             <Accessor Name="#get_Id()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'PdfWebApiRequest.Application.Id.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Key">
+            <Accessors>
+             <Accessor Name="#get_Key()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'PdfWebApiRequest.Application.Key.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="Datalogics.PdfWebApi.Client">
+        <Types>
+         <Type Name="FillFormRequest+Options">
+          <Members>
+           <Member Name="#DisableCalculations">
+            <Accessors>
+             <Accessor Name="#get_DisableCalculations()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:57:36Z">
+                <Issue>
+                 <Item>'FillFormRequest.Options.DisableCalculations.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#DisableGeneration">
+            <Accessors>
+             <Accessor Name="#get_DisableGeneration()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:57:36Z">
+                <Issue>
+                 <Item>'FillFormRequest.Options.DisableGeneration.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Flatten">
+            <Accessors>
+             <Accessor Name="#get_Flatten()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:57:36Z">
+                <Issue>
+                 <Item>'FillFormRequest.Options.Flatten.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PdfWebApiClient">
+          <Members>
+           <Member Name="#GetRequestURL(Datalogics.PdfWebApi.Client.PdfWebApiClient+RequestType)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2014-06-25 01:45:35Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'PdfWebApiClient.GetRequestURL(PdfWebApiClient.RequestType)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="RenderPagesRequest">
+          <Members>
+           <Member Name="#SetResampler(Datalogics.PdfWebApi.RenderPagesOptions.Resampler)">
+            <Messages>
+             <Message Id="Resampler" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>Resampler</Item>
+               <Item>'RenderPagesRequest.SetResampler(Resampler)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+             <Message Id="resampler" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="MemberParameter">
+               <Item>'RenderPagesRequest.SetResampler(Resampler)'</Item>
+               <Item>resampler</Item>
+               <Item>'resampler'</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="18" />
+                <Note Id="19" />
+                <Note Id="20" />
+                <Note Id="21" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="RenderPagesRequest+Options">
+          <Members>
+           <Member Name="#ColorModel">
+            <Accessors>
+             <Accessor Name="#get_ColorModel()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.ColorModel.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Compression">
+            <Accessors>
+             <Accessor Name="#get_Compression()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.Compression.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#DisableColorManagement">
+            <Accessors>
+             <Accessor Name="#get_DisableColorManagement()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.DisableColorManagement.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#DisableThinLineEnhance">
+            <Accessors>
+             <Accessor Name="#get_DisableThinLineEnhance()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.DisableThinLineEnhance.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#ExportPages">
+            <Accessors>
+             <Accessor Name="#get_ExportPages()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.ExportPages.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#ImageHeight">
+            <Accessors>
+             <Accessor Name="#get_ImageHeight()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.ImageHeight.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#ImageWidth">
+            <Accessors>
+             <Accessor Name="#get_ImageWidth()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.ImageWidth.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#OutputFormat">
+            <Accessors>
+             <Accessor Name="#get_OutputFormat()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.OutputFormat.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#OverPrintingPreview">
+            <Accessors>
+             <Accessor Name="#get_OverPrintingPreview()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.OverPrintingPreview.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#PdfRegion">
+            <Accessors>
+             <Accessor Name="#get_PdfRegion()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.PdfRegion.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#PrintPreview">
+            <Accessors>
+             <Accessor Name="#get_PrintPreview()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.PrintPreview.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Resampler">
+            <Accessors>
+             <Accessor Name="#get_Resampler()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.Resampler.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Resolution">
+            <Accessors>
+             <Accessor Name="#get_Resolution()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.Resolution.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Smoothing">
+            <Accessors>
+             <Accessor Name="#get_Smoothing()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.Smoothing.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#SupressAnnotations">
+            <Accessors>
+             <Accessor Name="#get_SupressAnnotations()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2014-06-25 02:42:05Z">
+                <Issue>
+                 <Item>'RenderPagesRequest.Options.SupressAnnotations.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="Datalogics.PdfWebApi.RenderPagesOptions">
+        <Types>
+         <Type Name="ColorModel">
+          <Members>
+           <Member Name="#CMYK">
+            <Messages>
+             <Message Id="CMYK" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>CMYK</Item>
+               <Item>'ColorModel.CMYK'</Item>
+               <Item>Cmyk</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="6" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RGB">
+            <Messages>
+             <Message Id="RGB" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>RGB</Item>
+               <Item>'ColorModel.RGB'</Item>
+               <Item>Rgb</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="4" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RGBA">
+            <Messages>
+             <Message Id="RGBA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>RGBA</Item>
+               <Item>'ColorModel.RGBA'</Item>
+               <Item>Rgba</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="5" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CompressionType">
+          <Members>
+           <Member Name="#LZW">
+            <Messages>
+             <Message Id="LZW" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 03:25:44Z">
+              <Issue Name="Member">
+               <Item>LZW</Item>
+               <Item>'CompressionType.LZW'</Item>
+               <Item>Lzw</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="8" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OutputFormat">
+          <Members>
+           <Member Name="#GIF">
+            <Messages>
+             <Message Id="GIF" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>GIF</Item>
+               <Item>'OutputFormat.GIF'</Item>
+               <Item>Gif</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#JPG">
+            <Messages>
+             <Message Id="JPG" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>JPG</Item>
+               <Item>'OutputFormat.JPG'</Item>
+               <Item>Jpg</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PNG">
+            <Messages>
+             <Message Id="PNG" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>PNG</Item>
+               <Item>'OutputFormat.PNG'</Item>
+               <Item>Png</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="11" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#TIF">
+            <Messages>
+             <Message Id="TIF" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>TIF</Item>
+               <Item>'OutputFormat.TIF'</Item>
+               <Item>Tif</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="10" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Resampler">
+          <Messages>
+           <Message Id="Resampler" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+            <Issue Name="Type">
+             <Item>Resampler</Item>
+             <Item>'Resampler'</Item>
+            </Issue>
+            <Notes>
+             <User Name="rswanson">
+              <Note Id="14" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Bicubic">
+            <Messages>
+             <Message Id="Bicubic" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2014-06-25 01:45:35Z">
+              <Issue Name="Member">
+               <Item>Bicubic</Item>
+               <Item>'Resampler.Bicubic'</Item>
+              </Issue>
+              <Notes>
+               <User Name="rswanson">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Notes>
+   <User Name="rswanson">
+    <Note Id="0" Modified="2014-06-25 03:06:24Z">This is a method that happens to start with the word Get and is not an appropriate candidate to become a property</Note>
+    <Note Id="1" Modified="2014-06-25 03:06:33Z">This is a method that happens to start with the word Get and is not an appropriate candidate to become a property</Note>
+    <Note Id="2" Modified="2014-06-25 03:15:16Z">Datalogics should not be flagged for spelling.  Alternative is to place it into a custom dictionary for FxCop which allegedly is troublesome to do.</Note>
+    <Note Id="3" Modified="2014-06-25 03:16:09Z">Reserved for possible future objects</Note>
+    <Note Id="4" Modified="2014-06-25 03:22:23Z">RGB is an acronym that should not be casel-altered</Note>
+    <Note Id="5" Modified="2014-06-25 03:22:54Z">RGBA is an acronym that should not be case-altered</Note>
+    <Note Id="6" Modified="2014-06-25 03:23:18Z">CMYK is an acronym that should not be case altered.</Note>
+    <Note Id="8" Modified="2014-06-25 03:29:34Z">LZW is an acronym and should not be case-altered</Note>
+    <Note Id="9" Modified="2014-06-25 03:33:38Z">JPG is an acronym that should not be case-altered</Note>
+    <Note Id="10" Modified="2014-06-25 03:33:52Z">TIF  is an acronym that should not be case-altered</Note>
+    <Note Id="11" Modified="2014-06-25 03:34:01Z">PNG  is an acronym that should not be case-altered</Note>
+    <Note Id="12" Modified="2014-06-25 03:34:14Z">GIF is an acronym that should not be case-altered</Note>
+    <Note Id="13" Modified="2014-06-25 03:35:01Z">Datalogics is valid</Note>
+    <Note Id="14" Modified="2014-06-25 03:35:38Z">Resampler is valid in terms of PDF Web API Documentation</Note>
+    <Note Id="15" Modified="2014-06-25 03:36:28Z">Bicubic is a valid word</Note>
+    <Note Id="16" Modified="2014-06-25 03:36:39Z">Datalogics is valid</Note>
+    <Note Id="17" Modified="2014-06-25 03:49:09Z">Resampler is a valid word in terms of PDF Web API Documentation</Note>
+    <Note Id="18" Modified="2014-06-25 03:49:39Z">resampler is a valid word in terms of PDF Web API documentation</Note>
+    <Note Id="19" Modified="2014-06-25 03:50:23Z">resampler is valid in terms of PDF Web API documentation</Note>
+    <Note Id="20" Modified="2014-06-25 03:50:52Z">resampler is valid in terms of PDF Web API documentation</Note>
+    <Note Id="21" Modified="2014-06-25 03:52:31Z">Is valid</Note>
+   </User>
+  </Notes>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
+    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
+    <Resolution Name="Type">Correct the spelling of '{0}' in type name {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+    <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

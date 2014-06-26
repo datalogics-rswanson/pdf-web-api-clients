@@ -56,10 +56,21 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.IO;
 
-namespace Datalogics.PDFWebAPI
+namespace Datalogics.PdfWebApi
 {
-    public class PDFWebAPIResponse
+    /// <summary>
+    /// This class wraps the response from the PDF WebAPI server after submitting a request.
+    /// If an error occurs, the response will contain an error code and an error message specifying
+    /// the details of the error.  Upon a successful request, if a processed file has been returned,
+    /// it may be saved off with the SaveProcFile() method.
+    /// </summary>
+    public class PdfWebApiResponse
     {
+        /// <summary>
+        /// This class specifies the data contract required to serialize a JSON object containing
+        /// an integer "errorCode" and a string "errorMessage" to and from a JSON string.
+        /// </summary>
+        /// <remarks>PDF Web API returns errors in this JSON string format</remarks>
         [DataContract]
         private class ErrorInfo
         {
@@ -72,18 +83,21 @@ namespace Datalogics.PDFWebAPI
         private readonly HttpResponseMessage httpResponseMessage;
         private readonly ErrorInfo errorInfo = new ErrorInfo();
 	    public bool Succeeded { get; private set; }
-        public bool Failed { get{return !Succeeded;} }
-	
-	    /** This constructor takes an HttpResponse from the PDF WebAPI server and
-	     * attempts to convert the return content body into a possible JSON error
-	     * message if the response code is not 200.
-	     * @param webapi_response - An HttpResponse from the PDF WebAPI server.
-	     */
-	    public PDFWebAPIResponse(HttpResponseMessage httpResponseMessage)
+        public bool Failed { get{ return !Succeeded; } }
+        public int ErrorCode { get { return errorInfo.ErrorCode; } }
+        public string ErrorMessage { get { return errorInfo.ErrorMessage; } }
+
+	    /// <summary>
+        /// This constructor takes an HttpResponse from the PDF WebAPI server and
+	    /// attempts to convert the return content body into a possible JSON error
+	    /// message if the response code is not OK (200).
+        /// </summary>
+	    /// <param name="httpResponseMessage">An HttpResponseMessage from the PDF WebAPI server</param>
+	    public PdfWebApiResponse(HttpResponseMessage httpResponseMessage)
         {
 		    this.httpResponseMessage = httpResponseMessage;
 		    // Check if the request was not successful
-		    if(httpResponseMessage.StatusCode != System.Net.HttpStatusCode.OK){
+		    if (httpResponseMessage.StatusCode != System.Net.HttpStatusCode.OK){
 			    // Attempt to read a JSON object error message
 			    DataContractJsonSerializer dataContractJsonSerializer = 
                     new DataContractJsonSerializer(typeof(ErrorInfo));
@@ -97,30 +111,12 @@ namespace Datalogics.PDFWebAPI
             }
 	    }
 
-	
-	    /** If the request failed, returns the PDF WebAPI error code.
-	     * @return A PDF WebAPI error code or 0 if there was no error.
-	     */
-	    public int GetErrorCode() 
-        {
-		    return errorInfo.ErrorCode;
-	    }
-
-	    /** If the request failed, returns a string associate with the PDF WebAPI
-	     * error code.
-	     * @return A string describing the PDF WebAPI error, otherwise null.
-	     */
-	    public String GetErrorMessage()
-        {
-		    return errorInfo.ErrorMessage;
-	    } 
-
-	    /** If the request succeeds, this method saves the processed output file to
-	     * the requested file path.
-	     * @param file - The file path to save the output file.
-	     * @return A boolean indicating successful saving of the result data to the
-	     * requested output file.
-	     */
+	    /// <summary>
+        /// If the request succeeds, this method saves the processed output file to
+	    /// the requested file path.
+        /// </summary>
+        /// <param name="fileName">The file path to save the processed return file to</param>
+	    /// <returns>A boolean indicating successful saving of the file</returns>
         public async Task<bool> SaveProcFile(string fileName)
         {
             if (Failed)

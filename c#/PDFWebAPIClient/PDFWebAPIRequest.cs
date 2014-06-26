@@ -54,23 +54,56 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
-namespace Datalogics.PDFWebAPI
+using Datalogics.PdfWebApi.Client;
+
+namespace Datalogics.PdfWebApi
 {
-    public abstract class PDFWebAPIRequest
+    /// <summary>
+    /// This is the abstract base class that all PDF WebAPI requests should be derived from.  It
+    /// also contains utility methods that those derived classes may need.
+    /// </summary>
+    public abstract class PdfWebApiRequest
     {
-        public string Id { get; private set; } //Auto-implemented Property
-        public string Key { get; private set; } //Auto-implemented Property
-        public string Url { get; private set; } //Auto-implemented Property
+        /// <summary>
+        /// This class specifies the data contract required to serialize an application id and key pair
+        /// to and from a JSON string.
+        /// </summary>
+        [DataContract]
+        private class Application
+        {
+            [DataMember(Name = "id", EmitDefaultValue = false)]
+            public string Id { get; set; }
+            [DataMember(Name = "key", EmitDefaultValue = false)]
+            public string Key { get; set; }
+        }
+
+        public string Id { get; private set; } // Application Id
+        public string Key { get; private set; } // Application Key
+        public Uri Url { get; private set; } // Application Url
+        // Container for the multipart content
         private Dictionary<String, List<HttpContent>> partLists = new Dictionary<string, List<HttpContent>>();
 
-        public PDFWebAPIRequest(string id, string key, string url)
+        /// <summary>
+        /// Sets the reqiured authorization values that all valid requests are required to have
+        /// </summary>
+        /// <param name="id">The application id</param>
+        /// <param name="key">The application key</param>
+        /// <param name="url">The Url for the request</param>
+        protected PdfWebApiRequest(string id, string key, Uri url)
         {
             Id = id;
             Key = key;
             Url = url;
         }
 
+        /// <summary>
+        /// Sets a unique part in the multicontent request
+        /// </summary>
+        /// <param name="content">The content of the part</param>
+        /// <param name="name">The unique name of the part</param>
         protected void SetUniquePart(HttpContent content, string name)
         {
             // Remove any existing part(s) with this name
@@ -80,69 +113,127 @@ namespace Datalogics.PDFWebAPI
             partLists[name].Add(content);
         }
 
+        /// <summary>
+        /// Adds a part to the multicontent request.  Additional parts with
+        /// identical names may be added.
+        /// </summary>
+        /// <param name="content">The content of the part</param>
+        /// <param name="name">The unique name of the part</param>
         protected void AddPart(HttpContent content, string name)
         {
             if (!partLists.ContainsKey(name))
                 partLists[name] = new List<HttpContent>();
             partLists[name].Add(content);
         }
+        
+        /// <summary>
+        /// Adds a unique file to the multi-part content using default octet-stream for content type.
+        /// </summary>
+        /// <param name="file">The file including path to add</param>
+        /// <param name="name">The name to assign the part</param>
+        protected void AddFilePart(string file, string name)
+        {
+            AddFilePart(file, name, "application/octet-stream", true);
+        }
 
-        protected void AddFilePart(string file, string name, string contentType = "application/octet-stream", bool isUnique = true)
+        /// <summary>
+        /// Adds a unique file to the multi-part content.
+        /// </summary>
+        /// <param name="file">The file including path to add</param>
+        /// <param name="name">The name to assign the part</param>
+        /// <param name="contentType">The content type for this file</param>
+        protected void AddFilePart(string file, string name, string contentType)
+        {
+            AddFilePart(file, name, contentType, true);
+        }
+
+        /// <summary>
+        /// Adds a file to the multi-part content.
+        /// </summary>
+        /// <param name="file">The file including path to add</param>
+        /// <param name="name">The name to assign the part</param>
+        /// <param name="contentType">The content type for this file</param>
+        /// <param name="isUnique">Specifies if the part should be unique</param>
+        protected void AddFilePart(string file, string name, string contentType, bool isUnique)
         {
             FileInfo fileInfo = new FileInfo(file);
-            if(fileInfo.Exists)
+            if (fileInfo.Exists)
             {
-                StreamContent streamContent = new StreamContent(fileInfo.OpenRead());
-                
                 ContentDispositionHeaderValue contentDisposition = new ContentDispositionHeaderValue("form-data");
                 contentDisposition.Name = name;
                 contentDisposition.FileName = fileInfo.Name;
+                
+                StreamContent streamContent = new StreamContent(fileInfo.OpenRead());
                 streamContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
                 streamContent.Headers.ContentDisposition = contentDisposition;
                 
-                if(isUnique)
+                if (isUnique)
                     SetUniquePart(streamContent, name);
                 else
                     AddPart(streamContent, name);
             }
         }
 
-        public void SetInputFile(string pdfFile, string inputName = null, string passWord = null)
+        /// <summary>
+        /// This utility method sets the input pdf file for the request.  Derived classes should
+        /// only use this method if their request requires an input pdf file.
+        /// </summary>
+        /// <param name="pdfFile">The Pdf file to set</param>
+        public void SetInputFile(string pdfFile)
+        {
+            SetInputFile(pdfFile, null, null);
+        }
+
+        /// <summary>
+        /// This utiltiy method sets the input pdf file for the request and the inputName part.
+        /// Derived classes should only use this method if their request requires an input pdf file.
+        /// </summary>
+        /// <param name="pdfFile">The Pdf file to set</param>
+        /// <param name="inputName">Optional name to give this input</param>
+        public void SetInputFile(string pdfFile, string inputName)
+        {
+            SetInputFile(pdfFile, inputName, null);
+        }
+
+        /// <summary>
+        /// This utiltiy method sets the password protected input pdf file for the request and the inputName part.
+        /// Derived classes should only use this method if their request requires an input pdf file.
+        /// </summary>
+        /// <param name="pdfFile">The Pdf file to set</param>
+        /// <param name="inputName">Optional name to give this input</param>
+        /// <param name="password">The password required to access the Pdf file</param>
+        public void SetInputFile(string pdfFile, string inputName, string password)
         {
             // Check if the pdfFile is accessed via the web
             if (pdfFile.StartsWith("http://", true, null) || pdfFile.StartsWith("https://", true, null))
             {
-                /* Ensure parts doesn't contain "input" since "input" and
-                 *  "inputURL" are mutually exclusive keys
-                 */
+                // Ensure parts doesn't contain "input" since "input" and
+                //  "inputURL" are mutually exclusive keys
                 partLists.Remove("input");
                 // Associate the pdfFile with the "inputURL" part
                 SetUniquePart(new StringContent(pdfFile), "inputURL");
             }
             else
             {
-                /* Ensure parts doesn't contain "inputURL" since "input" and
-                 * "inputURL" are mutually exclusive parts
-                 */
+                // Ensure parts doesn't contain "inputURL" since "input" and
+                // "inputURL" are mutually exclusive parts
                 partLists.Remove("inputURL");
                 // Associate the pdfFile with the "input" part
                 AddFilePart(pdfFile, "input");
             }
-            /* If the passWord parameter is not null or empty store the "password"
-             * part and body text
-             */
-            if (!String.IsNullOrEmpty(passWord))
+            // If the passWord parameter is not null or empty store the "password"
+            // part and body text
+            if (!String.IsNullOrEmpty(password))
             {
-                SetUniquePart(new StringContent(passWord), "password");
+                SetUniquePart(new StringContent(password), "password");
             }
             // This may be a subsequent call so remove the "password" part if found
             else
             {
                 partLists.Remove("password");
             }
-            /* If the name parameter is not null or empty store the "inputName"
-             * part and text body
-             */
+            // If the name parameter is not null or empty store the "inputName"
+            // part and text body
             if (!String.IsNullOrEmpty(inputName))
             {
                 SetUniquePart(new StringContent(inputName), "inputName");
@@ -154,71 +245,56 @@ namespace Datalogics.PDFWebAPI
             }
         }
 
-        public void SetFormData(string formDataFile, string formDataName = null)
-        {
-            // Associate the pdfFile with the "input" part
-            AddFilePart(formDataFile, "formsData");
-
-            /* If the name parameter is not null or empty store the "formDataName"
-             * part and text body
-             */
-            if (!String.IsNullOrEmpty(formDataName))
-            {
-                SetUniquePart(new StringContent(formDataName), "formDataName");
-            }
-            // This may be a subsequent call so remove the "formDataName" part if found
-            else
-            {
-                partLists.Remove("formDataName");
-            }
-        }
-
         /// <summary>
-        /// Blocking method
+        /// This method blocks while the request response is obtained from the PDF WebAPI server.
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public PDFWebAPIResponse GetResponse()
+        /// <returns>A PdfWebApiResponse object</returns>
+        public PdfWebApiResponse GetResponse()
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                // May need to set some httpClient.DefaultHeaders here
-                return new PDFWebAPIResponse(httpClient.PostAsync(Url, BuildRequestContent()).Result);
+                httpClient.DefaultRequestHeaders.Add("user-agent", "C# PdfWebApiClient V." + PdfWebApiClient.Version);
+                return new PdfWebApiResponse(httpClient.PostAsync(Url, BuildRequestContent()).Result);
             }
         }
 
         /// <summary>
-        /// Asynchronous method
+        /// Asynchronous request to obtain a response from the PDF WebAPI Server
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<PDFWebAPIResponse> GetResponseAsync()
+        /// <returns>A PdfWebApiResponse object</returns>
+        public async Task<PdfWebApiResponse> GetResponseAsync()
         {
             using (HttpClient httpClient = new HttpClient()) 
             {
-                // May need to set some httpClient.DefaultHeaders here
-                return new PDFWebAPIResponse(await httpClient.PostAsync(Url, BuildRequestContent()));
+                httpClient.DefaultRequestHeaders.Add("user-agent", "C# PdfWebApiClient V." + PdfWebApiClient.Version);
+                return new PdfWebApiResponse(await httpClient.PostAsync(Url, BuildRequestContent()));
             }
         } 
 
+        /// <summary>
+        /// This method builds the multiform content from all of the httpcontents in the partLists
+        /// </summary>
+        /// <remarks>Any base class requiring additional parts should override this method and 
+        /// call this base method within their override prior to adding the additional parts</remarks>
+        /// <returns>An HttpContent reference to a MultiFormDataContent object</returns>
         protected virtual HttpContent BuildRequestContent()
         {
             // Create a new multi-part content container with a random 128-bit boundary
             MultipartFormDataContent requestContent = new MultipartFormDataContent(System.Guid.NewGuid().ToString());
-
+            
             // Create the "application" JSON object { "id" : "<id>", "key" : "<key>" } part
-            string jsonApplicationString = String.Format(@"{{""id"" : ""{0}"", ""key"" : ""{1}""}}", Id, Key);
-            StringContent stringContent = new StringContent(jsonApplicationString, Encoding.UTF8, "application/json");
+            Application application = new Application() { Id = this.Id, Key = this.Key };
+            StringContent stringContent = new StringContent(WriteJsonToString(application), Encoding.UTF8, "application/json");
             requestContent.Add(stringContent, "application");
 
             // Iterate over partLists and add the part(s) from each list
             // Note: outer var's type is KeyValuePair<String, List<HttpContent>>
             //       inner var's type is HttpContent
-            foreach(var partList in partLists)
+            foreach (var partList in partLists)
             {
                 // Add each HttpContent part
                 // Note: partList.Key is the name common to all parts in this list
-                foreach(var part in partList.Value)
+                foreach (var part in partList.Value)
                 {
                     requestContent.Add(part, partList.Key);
                 }
@@ -227,6 +303,30 @@ namespace Datalogics.PDFWebAPI
             return requestContent;
         }
 
+        /// <summary>
+        /// This utility method accepts a "DataContract" attributed object and produces a serialized JSON
+        /// string representing the object
+        /// </summary>
+        /// <param name="jsonType">The "DataContract" attirubed object to serialize</param>
+        /// <returns>The string of the JSON serialized object</returns>
+        protected static string WriteJsonToString(object jsonType)
+        {
+            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(jsonType.GetType());
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                jsonSerializer.WriteObject(memoryStream, jsonType);
+                return Encoding.Default.GetString(memoryStream.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// Debug method for viewing the multi-part content of the request.
+        /// </summary>
+        /// <remarks>This method is meant for debugging requests and should not be called after 
+        /// a call to GetResponse() as the BuildRequestContent() will have already consumed the
+        /// HttpContent and will throw an exception.
+        /// Derived classes requiring more information should override this member</remarks>
+        /// <returns>A string representing the multipart content of the request</returns>
         public override string ToString()
         {
             return BuildRequestContent().ReadAsStringAsync().Result;
