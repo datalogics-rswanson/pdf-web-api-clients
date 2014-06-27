@@ -78,9 +78,9 @@ namespace Datalogics.PdfWebApi.Client
         }
 
         private Options options = new Options();
-
+        
         /// <summary>
-        /// Sets the reqiured authorization values and the Url that the request needs.
+        /// Sets the required authorization values and the Url that the request needs.
         /// </summary>
         /// <param name="id">The application id</param>
         /// <param name="key">The application key</param>

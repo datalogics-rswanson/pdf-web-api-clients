@@ -213,7 +213,7 @@ namespace Datalogics.PdfWebApi
                 // Associate the pdfFile with the "inputURL" part
                 SetUniquePart(new StringContent(pdfFile), "inputURL");
             }
-            else
+            else if (pdfFile != null)
             {
                 // Ensure parts doesn't contain "inputURL" since "input" and
                 // "inputURL" are mutually exclusive parts
@@ -221,7 +221,7 @@ namespace Datalogics.PdfWebApi
                 // Associate the pdfFile with the "input" part
                 AddFilePart(pdfFile, "input");
             }
-            // If the passWord parameter is not null or empty store the "password"
+            // If the password parameter is not null or empty store the "password"
             // part and body text
             if (!String.IsNullOrEmpty(password))
             {
@@ -307,7 +307,7 @@ namespace Datalogics.PdfWebApi
         /// This utility method accepts a "DataContract" attributed object and produces a serialized JSON
         /// string representing the object
         /// </summary>
-        /// <param name="jsonType">The "DataContract" attirubed object to serialize</param>
+        /// <param name="jsonType">The "DataContract" attributed object to serialize</param>
         /// <returns>The string of the JSON serialized object</returns>
         protected static string WriteJsonToString(object jsonType)
         {
