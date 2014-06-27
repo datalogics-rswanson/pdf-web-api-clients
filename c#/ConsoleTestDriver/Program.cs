@@ -51,6 +51,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Datalogics.PdfWebApi.Client;
+using Datalogics.PdfWebApi.Request;
+using Datalogics.PdfWebApi.Response;
 using Datalogics.PdfWebApi.RenderPagesOptions;
 
 namespace Datalogics.PdfWebApi.Client.ConsoleTestDriver
@@ -83,19 +85,19 @@ namespace Datalogics.PdfWebApi.Client.ConsoleTestDriver
             renderPagesRequest.SetSmoothing(SmoothingOptions.Line | SmoothingOptions.Text);
            
             // Get the response
-            PdfWebApiResponse response = renderPagesRequest.GetResponse();
+            PdfWebApiResponse renderPagesResponse = renderPagesRequest.GetResponse();
 
             // Check if the request succeeded
-            if (response.Succeeded)
+            if (renderPagesResponse.Succeeded)
             {
                 Console.WriteLine("Success - writing output file \"output\\image.jpg\"");
-                bool imageWritten = response.SaveProcFile("..\\..\\output\\image.jpg").Result;
+                bool imageWritten = renderPagesResponse.SaveProcFile("..\\..\\output\\image.jpg").Result;
             }
             else
             {
                 Console.WriteLine("Failure");
-                Console.WriteLine("ErrorCode: " + response.ErrorCode);
-                Console.WriteLine("ErrorMessage: " + response.ErrorMessage);
+                Console.WriteLine("ErrorCode: " + renderPagesResponse.ErrorCode);
+                Console.WriteLine("ErrorMessage: " + renderPagesResponse.ErrorMessage);
             }
             
             FillFormRequest fillFormRequest = client.CreateFillFormRequest();

@@ -58,8 +58,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 using Datalogics.PdfWebApi.Client;
+using Datalogics.PdfWebApi.Response;
 
-namespace Datalogics.PdfWebApi
+namespace Datalogics.PdfWebApi.Request
 {
     /// <summary>
     /// This is the abstract base class that all PDF WebAPI requests should be derived from.  It
@@ -221,7 +222,7 @@ namespace Datalogics.PdfWebApi
                 // Associate the pdfFile with the "input" part
                 AddFilePart(pdfFile, "input");
             }
-            // If the passWord parameter is not null or empty store the "password"
+            // If the password parameter is not null or empty store the "password"
             // part and body text
             if (!String.IsNullOrEmpty(password))
             {
@@ -307,7 +308,7 @@ namespace Datalogics.PdfWebApi
         /// This utility method accepts a "DataContract" attributed object and produces a serialized JSON
         /// string representing the object
         /// </summary>
-        /// <param name="jsonType">The "DataContract" attirubed object to serialize</param>
+        /// <param name="jsonType">The "DataContract" attributed object to serialize</param>
         /// <returns>The string of the JSON serialized object</returns>
         protected static string WriteJsonToString(object jsonType)
         {
@@ -315,7 +316,7 @@ namespace Datalogics.PdfWebApi
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 jsonSerializer.WriteObject(memoryStream, jsonType);
-                return Encoding.Default.GetString(memoryStream.ToArray());
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
             }
         }
 

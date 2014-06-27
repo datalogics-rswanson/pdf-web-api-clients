@@ -53,8 +53,9 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.IO;
+using Datalogics.PdfWebApi.Request;
 
-namespace Datalogics.PdfWebApi.Client
+namespace Datalogics.PdfWebApi.Request
 {
     /// <summary>
     /// This class is derived from the PdfWebApiRequest base class and is responsible for
@@ -78,9 +79,9 @@ namespace Datalogics.PdfWebApi.Client
         }
 
         private Options options = new Options();
-
+        
         /// <summary>
-        /// Sets the reqiured authorization values and the Url that the request needs.
+        /// Sets the required authorization values and the Url that the request needs.
         /// </summary>
         /// <param name="id">The application id</param>
         /// <param name="key">The application key</param>
@@ -102,7 +103,7 @@ namespace Datalogics.PdfWebApi.Client
         /// </summary>
         /// <param name="disableCalculations">A boolean specifying if numeric form
         /// fields should have calculations run on them</param>
-        public void SetEnableRunCalculations(bool enableCalculations)
+        public void SetEnableCalculations(bool enableCalculations)
         {
             // Method name should imply enabling to conform to best practices so complement option
             options.DisableCalculations = !enableCalculations;
@@ -115,7 +116,7 @@ namespace Datalogics.PdfWebApi.Client
         /// should be enabled or disabled on form fields</param>
         /// <example>A currency form field would auto-generate a dollar sign
         /// before the value of currency (eg. 6.78 -> $6.78)</example>
-        public void SetEnableGenerateAppearances(bool enableGeneration)
+        public void SetEnableAppearances(bool enableGeneration)
         {
             options.DisableGeneration = !enableGeneration;
         }
