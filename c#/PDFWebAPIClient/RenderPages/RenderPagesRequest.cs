@@ -57,7 +57,7 @@ using System.Globalization;
 
 using Datalogics.PdfWebApi.RenderPagesOptions;
 
-namespace Datalogics.PdfWebApi.Client
+namespace Datalogics.PdfWebApi.Request
 {
     /// <summary>
     /// This class is derived from the PdfWebApiRequest base class and is responsible for

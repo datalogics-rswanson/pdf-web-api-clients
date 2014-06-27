@@ -51,6 +51,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Datalogics.PdfWebApi.Client;
+using Datalogics.PdfWebApi.Request;
+using Datalogics.PdfWebApi.Response;
 using Datalogics.PdfWebApi.RenderPagesOptions;
 
 namespace Datalogics.PdfWebApi.Client.ConsoleTestDriver

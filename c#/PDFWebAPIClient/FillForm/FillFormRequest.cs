@@ -53,8 +53,9 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.IO;
+using Datalogics.PdfWebApi.Request;
 
-namespace Datalogics.PdfWebApi.Client
+namespace Datalogics.PdfWebApi.Request
 {
     /// <summary>
     /// This class is derived from the PdfWebApiRequest base class and is responsible for

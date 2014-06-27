@@ -52,6 +52,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
+using Datalogics.PdfWebApi.Request;
 using Datalogics.PdfWebApi.RenderPagesOptions;
 
 namespace Datalogics.PdfWebApi.Client

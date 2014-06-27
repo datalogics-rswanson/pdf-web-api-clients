@@ -58,8 +58,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 using Datalogics.PdfWebApi.Client;
+using Datalogics.PdfWebApi.Response;
 
-namespace Datalogics.PdfWebApi
+namespace Datalogics.PdfWebApi.Request
 {
     /// <summary>
     /// This is the abstract base class that all PDF WebAPI requests should be derived from.  It

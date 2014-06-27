@@ -56,7 +56,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.IO;
 
-namespace Datalogics.PdfWebApi
+namespace Datalogics.PdfWebApi.Response
 {
     /// <summary>
     /// This class wraps the response from the PDF WebAPI server after submitting a request.
