@@ -50,60 +50,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Datalogics.PdfWebApi.Client;
+using Datalogics.PdfWebApi.Request;
+using Datalogics.PdfWebApi.Response;
+using Datalogics.PdfWebApi.RenderPagesOptions;
 
-namespace Datalogics.PDFWebAPI
+namespace Datalogics.PdfWebApi.Client.ConsoleTestDriver
 {
     /// <summary>
-    /// This program demonstrates how to use the PDFWebAPIClient to make requests to
-    /// the PDF Web API server
-    /// <author> R. Swanson - rswanson@datalogics.com </author>
+    /// This program demonstrates how to use the PdfWebApiClient to make requests to
+    /// the PDF WebAPI server and how to process the responses.
     /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            const string id = "54208b6e";
-		    const string key = "020042be31edb98a32596a5530e11a97";
+            // Application id and key
+            const string id = "<ENTER YOUR APPLICATION ID HERE>";
+            const string key = "<ENTER YOUR APPLICATION KEY HERE>";
 
             // Create a new PDF Web API Client with this id and key
-            PDFWebAPIClient client = new PDFWebAPIClient(id, key);
+            PdfWebApiClient client = new PdfWebApiClient(id, key);
+
+            // Display the version
+            Console.WriteLine("C# PdfWebApiClient V." + PdfWebApiClient.Version);
 
             // Create a RenderPages Request
-            RenderPagesRequest request = client.CreateRenderPagesRequest();
+            RenderPagesRequest renderPagesRequest = client.CreateRenderPagesRequest();
 
             // Setup the Request
-            request.SetInputFile("..\\..\\input\\ducky.pdf");
-            request.SetColorModel(RenderPagesRequest.ColorModel.RGB);
-            request.SetImageHeight(300);
-            request.SetOutputFormat(RenderPagesRequest.OutputFormat.JPG);
-
+            renderPagesRequest.SetInputFile("..\\..\\input\\ducky.pdf");
+            renderPagesRequest.SetColorModel(ColorModel.RGB);
+            renderPagesRequest.SetImageHeight(300);
+            renderPagesRequest.SetSmoothing(SmoothingOptions.Line | SmoothingOptions.Text);
+           
             // Get the response
-            PDFWebAPIResponse response = request.GetResponse();
+            PdfWebApiResponse renderPagesResponse = renderPagesRequest.GetResponse();
 
-            // Celebrate or Cry
-            if(response.Succeeded)
+            // Check if the request succeeded
+            if (renderPagesResponse.Succeeded)
             {
                 Console.WriteLine("Success - writing output file \"output\\image.jpg\"");
-                bool imageWritten = response.SaveProcFile("..\\..\\output\\image.jpg").Result;
+                bool imageWritten = renderPagesResponse.SaveProcFile("..\\..\\output\\image.jpg").Result;
             }
             else
             {
                 Console.WriteLine("Failure");
-                Console.WriteLine("ErrorCode: " + response.GetErrorCode());
-                Console.WriteLine("ErrorMessage: " + response.GetErrorMessage());
+                Console.WriteLine("ErrorCode: " + renderPagesResponse.ErrorCode);
+                Console.WriteLine("ErrorMessage: " + renderPagesResponse.ErrorMessage);
             }
-
+            
             FillFormRequest fillFormRequest = client.CreateFillFormRequest();
 
             // Setup the FillForm Request
             fillFormRequest.SetInputFile("..\\..\\input\\FruitForm_1_AcroForm.pdf");
             fillFormRequest.SetFormData("..\\..\\input\\FruitForm_1_AcroForm_data.xfdf");
-            fillFormRequest.SetFlattening(true);          
+            fillFormRequest.SetFlattening(true);
 
             // Get the response
-            PDFWebAPIResponse fillFormResponse = fillFormRequest.GetResponse();
+            PdfWebApiResponse fillFormResponse = fillFormRequest.GetResponse();
 
-            // Celebrate or Cry
+            // Check if the request succeeded
             if (fillFormResponse.Succeeded)
             {
                 Console.WriteLine("Success - writing output file \"output\\FruitForm_1_AcroForm.pdf\"");
@@ -112,10 +119,10 @@ namespace Datalogics.PDFWebAPI
             else
             {
                 Console.WriteLine("Failure");
-                Console.WriteLine("ErrorCode: " + fillFormResponse.GetErrorCode());
-                Console.WriteLine("ErrorMessage: " + fillFormResponse.GetErrorMessage());
+                Console.WriteLine("ErrorCode: " + fillFormResponse.ErrorCode);
+                Console.WriteLine("ErrorMessage: " + fillFormResponse.ErrorMessage);
             }
-
+            
             // Keep console open
             Console.WriteLine("\nHit any key to exit");
             Console.ReadKey();
