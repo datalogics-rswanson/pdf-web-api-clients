@@ -214,7 +214,7 @@ namespace Datalogics.PdfWebApi.Request
                 // Associate the pdfFile with the "inputURL" part
                 SetUniquePart(new StringContent(pdfFile), "inputURL");
             }
-            else if (pdfFile != null)
+            else
             {
                 // Ensure parts doesn't contain "inputURL" since "input" and
                 // "inputURL" are mutually exclusive parts
@@ -316,7 +316,7 @@ namespace Datalogics.PdfWebApi.Request
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 jsonSerializer.WriteObject(memoryStream, jsonType);
-                return Encoding.Default.GetString(memoryStream.ToArray());
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
             }
         }
 

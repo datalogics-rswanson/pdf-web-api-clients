@@ -103,7 +103,7 @@ namespace Datalogics.PdfWebApi.Request
         /// </summary>
         /// <param name="disableCalculations">A boolean specifying if numeric form
         /// fields should have calculations run on them</param>
-        public void SetEnableRunCalculations(bool enableCalculations)
+        public void SetEnableCalculations(bool enableCalculations)
         {
             // Method name should imply enabling to conform to best practices so complement option
             options.DisableCalculations = !enableCalculations;
@@ -116,7 +116,7 @@ namespace Datalogics.PdfWebApi.Request
         /// should be enabled or disabled on form fields</param>
         /// <example>A currency form field would auto-generate a dollar sign
         /// before the value of currency (eg. 6.78 -> $6.78)</example>
-        public void SetEnableGenerateAppearances(bool enableGeneration)
+        public void SetEnableAppearances(bool enableGeneration)
         {
             options.DisableGeneration = !enableGeneration;
         }
